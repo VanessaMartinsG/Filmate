@@ -1,0 +1,46 @@
+main {
+    display: none;
+}
+
+@media (max-width: 490px) {
+    main {
+        height: 100vh;
+        width: 100%;
+        padding: 35px 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .closeButton {
+            display: flex;
+            justify-content: end;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        .logoFilmate {
+            display: flex;
+            justify-content: center;
+        }
+
+        .SingInButton {
+            display: flex;
+            justify-content: center;
+            padding: 12px 25px;
+            background-color: #353535;
+            height: 50px;
+            border-radius: 10px;
+
+            span {
+                margin-left: 25px;
+                color: #EC7609;
+                font-family: 'Nunito', sans-serif;
+                font-weight: bold;
+                font-size: 20px;
+
+            }
+        }
+    }
+}
