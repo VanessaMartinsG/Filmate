@@ -1,66 +1,73 @@
-.logo {
-  margin: 34px 0px 34px 30px;
-}
-
-.card-best-film {
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-image: url('../img/q7fXcrDPJcf6t3rzutaNwTzuKP1\ 1.png');
-  width: 100%;
-  height: 191px;
-  border-radius: 30px;
-  margin: 0 16px;
-  max-width: calc(100% - 32px);
-  position: relative;
-
-  .star {
-    position: absolute;
-    top: 14px;
-    right: 11px;
+main {
+  .logo {
+    margin: 34px 0px 34px 30px;
   }
-
-  .play-card {
-    background: rgba(218, 218, 218, 0.3);
-    backdrop-filter: blur(2.405px);
-    border-radius: 20px;
-    width: 211px;
-    height: 62px;
-    position: absolute;
-    left: 12px;
-    bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-
-    .details-title {
+  
+  .card-best-film {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('../img/q7fXcrDPJcf6t3rzutaNwTzuKP1\ 1.png');
+    width: 100%;
+    height: 191px;
+    border-radius: 30px;
+    margin: 0 16px;
+    max-width: calc(100% - 32px);
+    position: relative;
+  
+    .star {
+      position: absolute;
+      top: 14px;
+      right: 11px;
+    }
+  
+    .play-card {
+      background: rgba(218, 218, 218, 0.3);
+      backdrop-filter: blur(2.405px);
+      border-radius: 20px;
+      width: 211px;
+      height: 62px;
+      position: absolute;
+      left: 12px;
+      bottom: 8px;
       display: flex;
-      flex-direction: column;
-
-      .description{
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        letter-spacing: 0.02em;
-        margin-bottom: 4px;
-        color: #BCBCBC;
-      }
-
-      .title {
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        letter-spacing: 0.02em;
-        color: #FFFFFF;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+  
+      .details-title {
+        display: flex;
+        flex-direction: column;
+  
+        .description{
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.02em;
+          margin-bottom: 4px;
+          color: #BCBCBC;
+        }
+  
+        .title {
+          font-family: 'Lato';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0.02em;
+          color: #FFFFFF;
+        }
       }
     }
+    
   }
   
 }
+
+
+
+
 
 @media screen and (min-width: 766px) {
   main {
