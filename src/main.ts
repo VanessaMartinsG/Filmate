@@ -1,7 +1,7 @@
 import './scss/global.scss';
 
-import searchImage from '../img/search.svg';
-import searchOrangeImage from '../img/search-orange.svg';
+import searchImage from './img/search.svg';
+import searchOrangeImage from './img/search-orange.svg';
 
 
 const floatingMenu = document.querySelector(".floating-menu");
