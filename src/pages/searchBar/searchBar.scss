@@ -1,7 +1,7 @@
 main {
     .logo {
         margin: 34px 0px 34px 30px;
-      }
+    }
 
     .search-bar-film{
         display: flex;
@@ -10,9 +10,7 @@ main {
 
     .search-bar{
         position:relative;
-        padding-right:17px;
-        
-        
+
         .input-search{
             border-radius:20px;
             height: 48px;
@@ -27,7 +25,6 @@ main {
             bottom:12px;
             top:14px;
             right:12px
-           
         }
 
         .input-search{
@@ -37,33 +34,33 @@ main {
             font-weight:500; 
             font-family: 'Inter', sans-serif;
             color:#BBBBBB;
-            outline: 0;
-            
-         }
+            outline: 0; 
+        }
+
          input[type=search]::-ms-clear {  
             display: none; 
             width : 0; 
             height: 0; 
-            }
+
+        }
 
             input[type=search]::-ms-reveal { 
                 display: none; 
                 width : 0; 
                 height: 0; 
-                }
+            }
 
             input[type="search"]::-webkit-search-decoration,
             input[type="search"]::-webkit-search-cancel-button,
             input[type="search"]::-webkit-search-results-button,
             input[type="search"]::-webkit-search-results-decoration { 
                 display: none; 
-            }
-
-
-            
+            }            
     }
+}
 
-    
-
-
+@media screen and (min-width: 766px) {
+    main {
+      display: none;
+    }
 }
