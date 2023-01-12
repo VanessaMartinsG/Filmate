@@ -1,1 +1,1 @@
-import './searchBar.scss';
+import './searchPage.scss';
