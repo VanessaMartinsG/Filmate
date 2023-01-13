@@ -124,6 +124,95 @@ main {
   
 }
 
+.film-recents {
+  display: flex;
+  flex-direction: column;
+  margin-top: 31px;
+  overflow: hidden;
+  width: 100%;
+
+  h1 {
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: #fff;
+    margin-left: 30px;
+    margin-bottom: 19px;
+  }
+
+  .list-film-recents {
+    max-height: 400px;
+    .card-film-list {
+      width: 258px !important;
+      height: 359px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      margin: 0px 12px;
+      border-radius: 30px;
+      position: relative;
+
+      .card-film-box {
+        position: absolute;
+        background: rgba(218, 218, 218, 0.3);
+        backdrop-filter: blur(2.405px);
+        border-radius: 15px;
+        top: 17px;
+        right: 16px;
+        width: 77px;
+        height: 49px;
+        display: flex;
+        flex-direction: column;
+        padding: 6px 12px;
+
+        p {
+          font-family: 'Lato';
+          font-weight: 400;
+          font-size: 9px;
+          letter-spacing: 0.02em;
+          color: #FFFFFF;
+        }
+
+        .card-film-box-star {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          margin-top: 5px;
+
+          span {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+          }
+        }
+      }
+
+      .card-film-list-title {
+        background: rgba(218, 218, 218, 0.3);
+        backdrop-filter: blur(2.405px);
+        border-radius: 20px;
+        position: absolute;
+        bottom: 21px;
+        width: 226px;
+        left: 16px;
+        text-align: center;
+        height: 81.2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p {
+          font-family: 'Lato';
+          font-weight: 400;
+          font-size: 16px;
+          letter-spacing: 0.02em; 
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}
+
 }
 
 
