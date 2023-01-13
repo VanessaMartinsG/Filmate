@@ -25,7 +25,7 @@ const clickFloatingMenu = () => {
     personIcon?.classList.remove("active");
   })
 
- 
+
   personIcon?.addEventListener("click", () => {
     personIcon.classList.add("active");
     searchIcon!.src = searchImage;
