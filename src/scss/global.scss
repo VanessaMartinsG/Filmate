@@ -43,11 +43,12 @@ body {
   margin-top: 10px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
+  &.toastifyLogin {
+    font-size: 16px;
+  }
 }
 
-.toastifyLogin {
-  font-size: 16px;
-}
+
 
 @media screen and (min-width: 766px) {
   main {

@@ -5,10 +5,10 @@ interface Toastifyprops {
     text: string;
     background: string;
     position?: "right" | "left" | "center";
-    className: string;
+    className?: string;
 }
 
-export function Helper({ text, background, position, className }: Toastifyprops) {
+export function ShowToastify({ text, background, position, className }: Toastifyprops) {
     Toastify({
         text: text,
         className: className,

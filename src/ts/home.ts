@@ -1,7 +1,7 @@
 import '../scss/home.scss';
 import heart from '../img/heart.svg';
 import heartFilled from '../img/heart-filled.svg';
-import { Helper } from './helper/helper';
+import { ShowToastify } from './helper/helper';
 
 const heartBestFilm = document.querySelector<HTMLImageElement>(".heart")
 
@@ -15,11 +15,10 @@ const changeHeart = () => {
 
   heartBestFilm?.addEventListener("click", function () {
     if (favoriteFilm == true) {
-      Helper({
+      ShowToastify({
         text: 'Você não está logado!',
         background: 'linear-gradient(to right, rgb(82 3 14), rgb(8 1 2))',
-        position: 'right',
-        className: 'toastify'
+        position: 'right'
       })
     }
   });
