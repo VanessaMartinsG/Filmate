@@ -1,16 +1,14 @@
 import './login.scss';
-import Toastify from 'toastify-js'
-import '../../scss/tooltip.scss'
+import { Helper } from '../../ts/helper/helper';
 
 setTimeout(function () {
 }, 4500);
 const buttonLogin = <HTMLElement>(document.body.querySelector(".SingInButton"));
 buttonLogin?.addEventListener("click", function () {
-  Toastify({
-    text: "Erro ao logar!",
-    //duration: 3000,
-    className: 'toastify',
-    gravity: 'bottom',
-    newWindow: false,
-  }).showToast();
+  Helper({
+    text: 'Falha ao logar',
+    background: 'linear-gradient(to right, rgb(82 3 14), rgb(8 1 2))',
+    position: 'center',
+    className: 'toastify toastifyLogin'
+  })
 });

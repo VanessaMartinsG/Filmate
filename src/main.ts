@@ -1,10 +1,9 @@
 import './scss/global.scss';
 
+
 import searchImage from './img/search.svg';
 import searchOrangeImage from './img/search-orange.svg';
 
-
-import "toastify-js/src/toastify.css"
 
 const floatingMenu = document.querySelector(".floating-menu");
 
