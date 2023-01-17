@@ -3,65 +3,163 @@ main {
         margin: 34px 0px 34px 30px;
     }
 
-    .search-bar-film{
+    .search-bar-film {
         display: flex;
         justify-content: center;
     }
 
-    .search-bar{
-        position:relative;
+    .search-bar {
+        position: relative;
 
-        .input-search{
-            border-radius:20px;
+        .input-search {
+            border-radius: 20px;
             height: 48px;
             width: 327px;
             background-color: #353535;
         }
 
-        .search-icon{
-            position:absolute;
-            z-index:10;
-            left:12px;
-            bottom:12px;
-            top:14px;
-            right:12px
+        .search-icon {
+            position: absolute;
+            z-index: 10;
+            left: 12px;
+            bottom: 12px;
+            top: 14px;
+            right: 12px
         }
 
-        .input-search{
-            padding-left:40px;
-            padding-bottom:5px;
-            font-size:16px;
-            font-weight:500; 
+        .input-search {
+            padding-left: 40px;
+            padding-bottom: 5px;
+            font-size: 16px;
+            font-weight: 500;
             font-family: 'Inter', sans-serif;
-            color:#BBBBBB;
-            outline: 0; 
+            color: #BBBBBB;
+            outline: 0;
             border: 0px;
         }
 
-         input[type=search]::-ms-clear {  
-            display: none; 
-            width : 0; 
-            height: 0; 
+        input[type=search]::-ms-clear {
+            display: none;
+            width: 0;
+            height: 0;
 
         }
 
-        input[type=search]::-ms-reveal { 
-            display: none; 
-            width : 0; 
-            height: 0; 
+        input[type=search]::-ms-reveal {
+            display: none;
+            width: 0;
+            height: 0;
         }
 
         input[type="search"]::-webkit-search-decoration,
         input[type="search"]::-webkit-search-cancel-button,
         input[type="search"]::-webkit-search-results-button,
-        input[type="search"]::-webkit-search-results-decoration { 
-            display: none; 
-        }            
+        input[type="search"]::-webkit-search-results-decoration {
+            display: none;
+        }
     }
+
+    .cardsList {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        padding: 27px;
+        height: 100vh;
+
+        .allPoster {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 15px;
+
+            .poster {
+                border-radius: 20px;
+                width: 154px;
+                background-color: #353535;
+
+                .imgFilm {
+                    width: 154px;
+                    height: 184px;
+                    border-radius: 10px;
+                }
+
+                .rowTitleFav {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    padding: 8px 8px 0px 8px;
+                    margin-bottom: 15px;
+
+                    .title {
+                        color: #FFFFFF;
+                        font-family: 'Nunito', sans-serif;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+
+                .genreList {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    padding: 0px 8px 0px 8px;
+                    gap: 9px;
+
+                    .genre {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: bold;
+                        font-family: 'Nunito', sans-serif;
+                        font-size: 12px;
+                        background-color: #BE5AE1;
+                        border-radius: 5px;
+                        color: #FFFFFF;
+                    }
+                }
+
+                .pointFilm {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 15px;
+                    padding: 0px 10px;
+                    padding-bottom: 10px;
+
+                    .imgStar {
+                        width: 12px;
+                        height: 12px;
+                    }
+
+                    .numberPoint {
+                        color: #FFFFFF;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: bold;
+                        margin-left: 5px;
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 40px;
+            margin-bottom: 50px;
+            cursor: pointer;
+
+            button {
+                background-color: unset;
+                border: 0;
+            }
+        }
+    }
+
 }
 
 @media screen and (min-width: 766px) {
     main {
-      display: none;
+        display: none;
     }
 }
