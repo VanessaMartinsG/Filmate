@@ -1,14 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
 * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato';
+}
+
+body {
+    background-color: #1E1E1E;
+    height: 100vh;
+    -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  background-color: #1E1E1E;
-  height: 100vh;
-}
-
 
 .floating-menu {
   position: fixed;
