@@ -14,3 +14,9 @@ export interface IMovie {
   vote_average: number,
   vote_count: number
 }
+
+export interface IGenrer {
+  id:number,
+  name:string,
+
+}
