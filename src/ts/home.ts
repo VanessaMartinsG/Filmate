@@ -1,10 +1,10 @@
 import '../scss/home.scss';
-
 import heart from '../img/heart.svg';
 import heartFilled from '../img/heart-filled.svg';
 import starIcon from '../img/star.png';
 import { movieService } from '../services/film';
 import { IMovie } from '../interface/interface';
+import { ShowToastify } from './helper/helper';
 
 const heartBestFilm = document.querySelector<HTMLImageElement>(".heart")
 const baseURlImg = 'https://image.tmdb.org/t/p/original';
@@ -15,6 +15,21 @@ const changeHeart = () => {
     favoriteFilm = !favoriteFilm;
     favoriteFilm ? heartBestFilm!.src = heartFilled : heartBestFilm!.src = heart
   })
+
+
+  heartBestFilm?.addEventListener("click", function () {
+    if (favoriteFilm == true) {
+      ShowToastify({
+        text: 'Você não está logado!',
+        background: 'linear-gradient(to right, rgb(82 3 14), rgb(8 1 2))',
+        position: 'right'
+      })
+    }
+  });
+
+
+
+
 }
 
 heartBestFilm ? changeHeart() : '';

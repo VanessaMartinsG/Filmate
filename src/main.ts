@@ -1,5 +1,6 @@
 import './scss/global.scss';
 
+
 import searchImage from './img/search.svg';
 import searchOrangeImage from './img/search-orange.svg';
 
@@ -22,6 +23,7 @@ const clickFloatingMenu = () => {
     homeIcon?.classList.remove("active");
     personIcon?.classList.remove("active");
   })
+
 
   personIcon?.addEventListener("click", () => {
     personIcon.classList.add("active");
