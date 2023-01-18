@@ -34,3 +34,4 @@ const clickFloatingMenu = () => {
 }
 
 floatingMenu ? clickFloatingMenu() : '';
+
