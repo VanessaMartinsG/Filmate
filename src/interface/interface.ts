@@ -16,7 +16,11 @@ export interface IMovie {
 }
 
 export interface IGenrer {
-  id:number,
-  name:string,
+  id: number,
+  name: string,
 
+}
+
+export interface IGenrerColor extends IGenrer {
+  color: string,
 }
