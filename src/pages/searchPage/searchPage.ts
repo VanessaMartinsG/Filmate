@@ -3,13 +3,17 @@ import './searchPage.scss';
 import { movieService } from '../../services/film';
 import { IGenrer } from '../../interface/interface';
 
-import favIconPath from '../../img/heart.svg';
+import heart from '../../img/heart.svg';
+import heartFilled from '../../img/heart-filled.svg';
 import imgStarPath from '../../img/star.png';
+import { ShowToastify } from '../../ts/helper/helper';
+
 
 let buttons = document.querySelector<HTMLDivElement>(".buttons")
 let btnBack = document.querySelector<HTMLButtonElement>(".btnBack")
 let btnNext = document.querySelector<HTMLButtonElement>(".btnNext")
 let page = 1;
+let focusGenrer: string;
 
 const listGenrer = document.querySelector<HTMLDivElement>('.items')
 const movieGenrerList = async () => {
@@ -19,18 +23,44 @@ const movieGenrerList = async () => {
       genrer.setAttribute("data-id", item.id.toString())
       genrer.textContent = item.name;
       genrer.href = "#";
-      console.log(listGenrer);
-
       listGenrer?.appendChild(genrer)
+
+      genrer?.addEventListener("click", () => {
+         focusGenrer = item.id.toString()
+         showMovies()
+      })
+
    });
+}
+
+const changeHeart = (heartBestFilm: HTMLImageElement) => {
+   let favoriteFilm = false;
+   heartBestFilm?.addEventListener("click", () => {
+      favoriteFilm = !favoriteFilm;
+      favoriteFilm ? heartBestFilm!.src = heartFilled : heartBestFilm!.src = heart
+   })
+
+
+   heartBestFilm?.addEventListener("click", function () {
+      if (favoriteFilm == true) {
+         ShowToastify({
+            text: 'Você não está logado!',
+            background: 'linear-gradient(to right, rgb(82 3 14), rgb(8 1 2))',
+            position: 'right'
+         })
+      }
+   });
+
 }
 
 async function showMovies() {
    const responseDiscover = await movieService.discoverMovie(page);
    const responseGenre = await movieService.getGenrerList();
+   const responseMovieGenre = await movieService.genrerMovies(page, focusGenrer)
    let numberPage: number = responseDiscover.data.page
+   console.log(focusGenrer)
 
-   createPoster(responseDiscover, responseGenre)
+   createPoster(responseDiscover, responseGenre, responseMovieGenre)
 
 
    btnBack?.addEventListener("click", () => {
@@ -57,70 +87,141 @@ async function showMovies() {
 
 }
 
-function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosResponse) {
+function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosResponse, responseMovieGenre: AxiosResponse) {
    let baseImgUrl = 'https://image.tmdb.org/t/p/original'
    let allPoster = document.querySelector(".allPoster");
    allPoster!.innerHTML = ''
+   //console.log(responseMovieGenre)
 
-   for (let i = 0; i < 20; i++) {
+   if (focusGenrer == null) {
+      for (let i = 0; i < 20; i++) {
 
-      let poster = document.createElement("div")
-      poster.classList.add("poster")
-      allPoster!.appendChild(poster)
+         let poster = document.createElement("div")
+         poster.classList.add("poster")
+         poster.setAttribute("data-id", responseDiscover.data.results[i].id.toString())
+         allPoster!.appendChild(poster)
 
-      let imgFilm = document.createElement("img")
-      imgFilm.src = `${baseImgUrl}${responseDiscover.data.results[i].poster_path}`
-      imgFilm.classList.add("imgFilm")
-      poster!.appendChild(imgFilm)
+         let imgFilm = document.createElement("img")
+         imgFilm.src = `${baseImgUrl}${responseDiscover.data.results[i].poster_path}`
+         imgFilm.classList.add("imgFilm")
+         poster!.appendChild(imgFilm)
 
-      let rowTitleFav = document.createElement("div")
-      rowTitleFav.classList.add("rowTitleFav")
-      poster!.appendChild(rowTitleFav)
+         let rowTitleFav = document.createElement("div")
+         rowTitleFav.classList.add("rowTitleFav")
+         poster!.appendChild(rowTitleFav)
 
-      let title = document.createElement("p")
-      title.classList.add("title")
-      title.textContent = responseDiscover.data.results[i].title
-      rowTitleFav!.appendChild(title)
+         let title = document.createElement("p")
+         title.classList.add("title")
+         title.textContent = responseDiscover.data.results[i].title
+         rowTitleFav!.appendChild(title)
 
-      let iconFav = document.createElement("img")
-      iconFav.classList.add("iconFav")
-      iconFav.src = favIconPath
-      rowTitleFav!.appendChild(iconFav)
+         let heartIcon = document.createElement("img")
+         heartIcon.classList.add("heart")
+         heartIcon.setAttribute("data-id", responseDiscover.data.results[i].id.toString())
+         heartIcon.src = heart
+         changeHeart(heartIcon);
+         rowTitleFav!.appendChild(heartIcon)
 
-      let genreList = document.createElement("div");
-      genreList.classList.add("genreList")
-      poster!.appendChild(genreList)
+         let genreList = document.createElement("div");
+         genreList.classList.add("genreList")
+         poster!.appendChild(genreList)
 
-      let listGenresIds: [] = responseDiscover.data.results[i].genre_ids
-      let listGenresFilms: IGenrer[] = responseGenre.data.genres;
+         let listGenresIds: [] = responseDiscover.data.results[i].genre_ids
+         let listGenresFilms: IGenrer[] = responseGenre.data.genres;
 
-      listGenresFilms.forEach((item) => {
-         listGenresIds.forEach((itemId) => {
-            if (item.id == itemId) {
-               let genre = document.createElement("div");
-               genre.textContent = item.name
-               genre.classList.add("genre")
-               genre.id = item.name.replace(" ", "_")
-               genreList!.appendChild(genre)
-            }
+         listGenresFilms.forEach((item) => {
+            listGenresIds.forEach((itemId) => {
+               if (item.id == itemId) {
+                  let genre = document.createElement("div");
+                  genre.textContent = item.name
+                  genre.classList.add("genre")
+                  genre.id = item.name.replace(" ", "_")
+                  genreList!.appendChild(genre)
+               }
+            })
          })
-      })
 
-      let pointFilm = document.createElement("div")
-      pointFilm.classList.add("pointFilm")
-      poster!.appendChild(pointFilm)
+         let pointFilm = document.createElement("div")
+         pointFilm.classList.add("pointFilm")
+         poster!.appendChild(pointFilm)
 
-      let imgStar = document.createElement("img")
-      imgStar.classList.add("imgStar")
-      imgStar.src = imgStarPath
-      pointFilm!.appendChild(imgStar)
+         let imgStar = document.createElement("img")
+         imgStar.classList.add("imgStar")
+         imgStar.src = imgStarPath
+         pointFilm!.appendChild(imgStar)
 
-      let numberPoint = document.createElement("div")
-      numberPoint.classList.add("numberPoint")
-      numberPoint.textContent = String(responseDiscover.data.results[i].vote_average + ' pts');
-      pointFilm!.appendChild(numberPoint)
+         let numberPoint = document.createElement("div")
+         numberPoint.classList.add("numberPoint")
+         numberPoint.textContent = String(responseDiscover.data.results[i].vote_average + ' pts');
+         pointFilm!.appendChild(numberPoint)
+      }
    }
+   else {
+      allPoster!.innerHTML = ''
+      console.log("entrou aqui")
+      console.log(responseMovieGenre)
+      for (let i = 0; i < 20; i++) {
+         let listGenresIds: [] = responseMovieGenre.data.results[i].genre_ids
+         let listGenresFilms: IGenrer[] = responseGenre.data.genres;
 
+
+         let poster = document.createElement("div")
+         poster.classList.add("poster")
+         poster.setAttribute("data-id", responseMovieGenre.data.results[i].id.toString())
+         allPoster!.appendChild(poster)
+
+         let imgFilm = document.createElement("img")
+         imgFilm.src = `${baseImgUrl}${responseMovieGenre.data.results[i].poster_path}`
+         imgFilm.classList.add("imgFilm")
+         poster!.appendChild(imgFilm)
+
+         let rowTitleFav = document.createElement("div")
+         rowTitleFav.classList.add("rowTitleFav")
+         poster!.appendChild(rowTitleFav)
+
+         let title = document.createElement("p")
+         title.classList.add("title")
+         title.textContent = responseMovieGenre.data.results[i].title
+         rowTitleFav!.appendChild(title)
+
+         let heartIcon = document.createElement("img")
+         heartIcon.classList.add("heart")
+         heartIcon.setAttribute("data-id", responseMovieGenre.data.results[i].id.toString())
+         heartIcon.src = heart
+         changeHeart(heartIcon);
+         rowTitleFav!.appendChild(heartIcon)
+
+         let genreList = document.createElement("div");
+         genreList.classList.add("genreList")
+         poster!.appendChild(genreList)
+
+         listGenresFilms.forEach((item) => {
+            listGenresIds.forEach((itemId) => {
+               if (item.id == itemId) {
+                  let genre = document.createElement("div");
+                  genre.textContent = item.name
+                  genre.classList.add("genre")
+                  genre.id = item.name.replace(" ", "_")
+                  genreList!.appendChild(genre)
+               }
+            })
+         })
+
+         let pointFilm = document.createElement("div")
+         pointFilm.classList.add("pointFilm")
+         poster!.appendChild(pointFilm)
+
+         let imgStar = document.createElement("img")
+         imgStar.classList.add("imgStar")
+         imgStar.src = imgStarPath
+         pointFilm!.appendChild(imgStar)
+
+         let numberPoint = document.createElement("div")
+         numberPoint.classList.add("numberPoint")
+         numberPoint.textContent = String(responseMovieGenre.data.results[i].vote_average + ' pts');
+         pointFilm!.appendChild(numberPoint)
+      }
+   }
 }
 
 
