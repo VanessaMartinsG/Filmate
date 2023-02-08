@@ -14,6 +14,7 @@ let btnBack = document.querySelector<HTMLButtonElement>(".btnBack")
 let btnNext = document.querySelector<HTMLButtonElement>(".btnNext")
 let page = 1;
 let focusGenrer: string;
+let moviesFav: string[] = [];
 
 const listGenrer = document.querySelector<HTMLDivElement>('.items')
 const movieGenrerList = async () => {
@@ -34,15 +35,27 @@ const movieGenrerList = async () => {
 }
 
 const changeHeart = (heartBestFilm: HTMLImageElement) => {
-   let favoriteFilm = false;
+   moviesFav = JSON.parse(localStorage.getItem("moviesFav")!)
    heartBestFilm?.addEventListener("click", () => {
-      favoriteFilm = !favoriteFilm;
-      favoriteFilm ? heartBestFilm!.src = heartFilled : heartBestFilm!.src = heart
+      if (moviesFav.find(item => JSON.parse(item).id.toString() == heartBestFilm.getAttribute('data-id')!.toString())) {
+         heartBestFilm!.src = heart
+         let index = moviesFav.findIndex(item => JSON.parse(item).id.toString() == heartBestFilm.getAttribute('data-id')!.toString())
+         moviesFav.splice(index, 1)
+
+
+      } else {
+         heartBestFilm!.src = heartFilled
+         if (heartBestFilm.getAttribute('data-movie')) {
+            moviesFav.push(heartBestFilm.getAttribute('data-movie')!)
+         }
+
+      }
+      localStorage.setItem('moviesFav', JSON.stringify(moviesFav));
    })
 
 
    heartBestFilm?.addEventListener("click", function () {
-      if (favoriteFilm == true) {
+      if (moviesFav.find(item => JSON.parse(item).id.toString() == heartBestFilm.getAttribute('data-id')!.toString())) {
          ShowToastify({
             text: 'Você não está logado!',
             background: 'linear-gradient(to right, rgb(82 3 14), rgb(8 1 2))',
@@ -58,7 +71,6 @@ async function showMovies() {
    const responseGenre = await movieService.getGenrerList();
    const responseMovieGenre = await movieService.genrerMovies(page, focusGenrer)
    let numberPage: number = responseDiscover.data.page
-   console.log(focusGenrer)
 
    createPoster(responseDiscover, responseGenre, responseMovieGenre)
 
@@ -91,7 +103,7 @@ function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosRespo
    let baseImgUrl = 'https://image.tmdb.org/t/p/original'
    let allPoster = document.querySelector(".allPoster");
    allPoster!.innerHTML = ''
-   //console.log(responseMovieGenre)
+   moviesFav = JSON.parse(localStorage.getItem("moviesFav")!)
 
    if (focusGenrer == null) {
       for (let i = 0; i < 20; i++) {
@@ -118,7 +130,12 @@ function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosRespo
          let heartIcon = document.createElement("img")
          heartIcon.classList.add("heart")
          heartIcon.setAttribute("data-id", responseDiscover.data.results[i].id.toString())
-         heartIcon.src = heart
+         heartIcon.setAttribute("data-movie", JSON.stringify(responseDiscover.data.results[i]))
+         if (moviesFav.find(item => JSON.parse(item).id.toString() == responseDiscover.data.results[i].id.toString())) {
+            heartIcon.src = heartFilled
+         } else {
+            heartIcon.src = heart
+         }
          changeHeart(heartIcon);
          rowTitleFav!.appendChild(heartIcon)
 
@@ -158,8 +175,6 @@ function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosRespo
    }
    else {
       allPoster!.innerHTML = ''
-      console.log("entrou aqui")
-      console.log(responseMovieGenre)
       for (let i = 0; i < 20; i++) {
          let listGenresIds: [] = responseMovieGenre.data.results[i].genre_ids
          let listGenresFilms: IGenrer[] = responseGenre.data.genres;
@@ -187,7 +202,11 @@ function createPoster(responseDiscover: AxiosResponse, responseGenre: AxiosRespo
          let heartIcon = document.createElement("img")
          heartIcon.classList.add("heart")
          heartIcon.setAttribute("data-id", responseMovieGenre.data.results[i].id.toString())
-         heartIcon.src = heart
+         if (moviesFav.find(item => JSON.parse(item).id.toString() == responseDiscover.data.results[i].id.toString())) {
+            heartIcon.src = heartFilled
+         } else {
+            heartIcon.src = heart
+         }
          changeHeart(heartIcon);
          rowTitleFav!.appendChild(heartIcon)
 
