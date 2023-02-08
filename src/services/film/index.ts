@@ -17,5 +17,23 @@ export const movieService = {
         } catch (error) {
             return Promise.reject(error)
         }
+    },
+
+    async discoverMovie(page: number) {
+        try {
+            const response = await api.get(`/discover/movie/?page=${page}`)
+            return response
+        } catch (error) {
+            return Promise.reject(error)
+        }
+    },
+
+    async genrerMovies(page: number, with_genres: string) {
+        try {
+            const response = await api.get(`/discover/movie/?page=${page}&with_genres=${with_genres}`)
+            return response
+        } catch (error) {
+            return Promise.reject(error)
+        }
     }
 }
